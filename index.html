@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Management Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Contact Management</div>
+        <div class="nav-links">
+            <a href="add_contact.html">Add Contact</a>
+            <a href="logout.php">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <div class="profile-info">
+                <img src="assets/img/profile.png" alt="Profile Picture" class="profile-image">
+                <h2>Welcome, User</h2>
+            </div>
+            <div class="contact-info">
+                <p><strong>Total Contacts:</strong> <span id="contact-count">2</span></p>
+            </div>
+        </div>
+
+        <h1>Contacts</h1>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Search contacts..." id="search-bar" onkeyup="searchContacts()">
+        </div>
+
+        <table id="contacts-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>john@example.com</td>
+                    <td>(555) 123-4567</td>
+                    <td>
+                        <a href="edit_contact.html?id=1">Edit</a>
+                        <a href="delete_contact.php?id=1">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>jane@example.com</td>
+                    <td>(555) 987-6543</td>
+                    <td>
+                        <a href="edit_contact.html?id=2">Edit</a>
+                        <a href="delete_contact.php?id=2">Delete</a>
+                    </td>
+                </tr>
+                <!-- More contacts go here -->
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <a href="index.html?page=1">1</a>
+            <a href="index.html?page=2">2</a>
+            <a href="index.html?page=3">3</a>
+            <!-- More pagination links go here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Contact Management System. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Search functionality for contacts
+        function searchContacts() {
+            let filter = document.getElementById("search-bar").value.toLowerCase();
+            let rows = document.getElementById("contacts-table").getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName("td");
+                let name = cells[0].textContent.toLowerCase();
+                let email = cells[1].textContent.toLowerCase();
+                let phone = cells[2].textContent.toLowerCase();
+                
+                if (name.includes(filter) || email.includes(filter) || phone.includes(filter)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
